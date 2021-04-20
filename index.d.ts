@@ -6,7 +6,7 @@
  * Description:
  */
 
-declare module '@youngtailors/react-native-spring-scrollview' {
+declare module 'react-native-spring-scrollview' {
   import {Animated, ViewProps, ViewStyle} from 'react-native';
   import * as React from 'react';
 
@@ -114,7 +114,7 @@ declare module '@youngtailors/react-native-spring-scrollview' {
     inverted?: boolean;
     onMomentumScrollBegin?: () => any;
     onMomentumScrollEnd?: () => any;
-    onScroll?: (evt: ScrollEvent) => any;
+    onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     onNativeContentOffsetExtract?: NativeContentOffset;
     onSizeChange?: (size: Size) => any;
     onContentSizeChange?: (size: Size) => any;

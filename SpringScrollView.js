@@ -8,7 +8,6 @@
 
 import * as React from "react";
 import {
-  Animated,
   requireNativeComponent,
   View,
   findNodeHandle,
@@ -21,6 +20,7 @@ import {
   ViewStyle,
   ScrollView
 } from "react-native";
+import Animated from "react-native-reanimated";
 import * as TextInputState from "react-native/Libraries/Components/TextInput/TextInputState";
 import { FooterStatus } from "./LoadingFooter";
 import { NormalHeader } from "./NormalHeader";
@@ -34,7 +34,6 @@ export class SpringScrollView extends React.PureComponent<SpringScrollViewPropTy
   _offsetY: Animated.Value;
   _offsetX: Animated.Value;
   _offsetYValue: number = 0;
-  _event;
   _keyboardHeight: number;
   _refreshHeader;
   _loadingFooter;
@@ -71,19 +70,6 @@ export class SpringScrollView extends React.PureComponent<SpringScrollViewPropTy
     };
     this._offsetY = this._nativeOffset.y;
     this._offsetX = this._nativeOffset.x;
-    this._event = Animated.event(
-      [
-        {
-          nativeEvent: {
-            contentOffset: this._nativeOffset
-          }
-        }
-      ],
-      {
-        useNativeDriver: true,
-        listener: this._onScroll
-      }
-    );
   }
 
   render() {
@@ -106,7 +92,7 @@ export class SpringScrollView extends React.PureComponent<SpringScrollViewPropTy
         {...this.props}
         ref={ref => (this._scrollView = ref)}
         style={Platform.OS === "android" ? wStyle : { flex: 1 }}
-        onScroll={this._event}
+        onScroll={this.props.onScroll}
         refreshHeaderHeight={onRefresh ? Refresh.height : 0}
         loadingFooterHeight={onLoading ? Loading.height : 0}
         onLayout={this._onWrapperLayoutChange}
@@ -297,20 +283,20 @@ export class SpringScrollView extends React.PureComponent<SpringScrollViewPropTy
   };
 
   _beginIndicatorDismissAnimation() {
-    this._indicatorOpacity.setValue(1);
-    this._indicatorAnimation && this._indicatorAnimation.stop();
-    this._indicatorAnimation = Animated.timing(this._indicatorOpacity, {
-      toValue: 0,
-      delay: 500,
-      duration: 500,
-      useNativeDriver: true
-    });
-    this._indicatorAnimation.start(({ finished }) => {
-      if (!finished) {
-        this._indicatorOpacity.setValue(1);
-      }
-      this._indicatorAnimation = null;
-    });
+    // this._indicatorOpacity.setValue(1);
+    // this._indicatorAnimation && this._indicatorAnimation.stop();
+    // this._indicatorAnimation = Animated.timing(this._indicatorOpacity, {
+    //   toValue: 0,
+    //   delay: 500,
+    //   duration: 500,
+    //   useNativeDriver: true
+    // });
+    // this._indicatorAnimation.start(({ finished }) => {
+    //   if (!finished) {
+    //     this._indicatorOpacity.setValue(1);
+    //   }
+    //   this._indicatorAnimation = null;
+    // });
   }
 
   _onScroll = e => {

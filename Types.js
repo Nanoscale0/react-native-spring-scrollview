@@ -7,7 +7,7 @@
  *
  */
 
-import { Animated, ViewProps, ViewStyle } from "react-native";
+import { Animated, ViewProps, ViewStyle, NativeSyntheticEvent, NativeScrollEvent } from "react-native";
 import { RefreshHeader } from "./RefreshHeader";
 import { LoadingFooter } from "./LoadingFooter";
 
@@ -61,7 +61,7 @@ export interface SpringScrollViewPropType extends ViewProps {
   inverted?: boolean;
   onMomentumScrollBegin?: () => any,
   onMomentumScrollEnd?: () => any,
-  onScroll?: (evt: ScrollEvent) => any,
+  onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void,
   keyboardShouldPersistTaps?: "always"|"never"|"handled",
   onNativeContentOffsetExtract?: NativeContentOffset,
   onSizeChange?: ({ width: number, height: number }) => any,

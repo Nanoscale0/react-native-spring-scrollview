@@ -22,7 +22,8 @@
   "peerDependencies": {
     "lottie-react-native": "latest",
     "react": "^16.3.1",
-    "react-native": "^0.50.0"
+    "react-native": "^0.50.0",
+    "react-native-reanimated": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"
